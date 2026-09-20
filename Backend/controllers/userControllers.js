@@ -21,11 +21,12 @@ const createToken = (id,email)=>{
 }
 
 const cookieOption = {
-    httpOnly : true,//js code not read theis code
-    secure:false,//http me bhi chjal jayega
-    path:"/",
-    maxAge:60*60*1000
-}
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    path: "/",
+    maxAge: 60 * 60 * 1000
+};
 
 export const signup = async (req,res)=>{
     //client side error solve in try block only server issue solve in catch 
